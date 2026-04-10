@@ -1,4 +1,5 @@
 import { use, useEffect, useState } from "react";
+import { ThreeDot } from "react-loading-indicators";
 import MovieCard from "../components/MovieCard";
 import "../css/Home.css";
 import "../css/MovieCard.css";
@@ -45,11 +46,19 @@ function Home() {
           Search
         </button>
       </form>
-      <div className="movies-grid">
-        {movies.map((movie) => (
-          <MovieCard movie={movie} key={movie.id} />
-        ))}
-      </div>
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div>
+          <ThreeDot color="#ffffff" size="medium" text="" textColor="" />
+        </div>
+      ) : (
+        <div className="movies-grid">
+          {movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
